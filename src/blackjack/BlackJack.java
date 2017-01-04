@@ -18,6 +18,7 @@ public class BlackJack {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) {
         // TODO code application logic here,
         Scanner sn = new Scanner(System.in);
@@ -94,6 +95,7 @@ public class BlackJack {
         }
         System.out.println("Игра окончена.");
     }
+ 
     
     
     private static int BestValue (ArrayList<Integer> currentPoints) 
@@ -121,9 +123,10 @@ public class BlackJack {
     
     static void showOutcome(ArrayList<Card> playerHand,ArrayList<Card> dealerHand)
     {
-        System.out.println("У вас на руках:");
+        //System.out.println("У вас на руках:");
          for (Card deck1 : playerHand) {
-             System.out.println(deck1.name());
+             //System.out.println(deck1.name());
+             
         }
         System.out.println("Сумма карт: "+ handValue(playerHand)); 
         System.out.println("У дилера на руках:");
