@@ -5,8 +5,8 @@
  */
 package blackjack;
 
-import static blackjack.BlackJack.handValue;
-import static blackjack.BlackJack.showOutcome;
+
+import static blackjack.BlackJack.handAceCount;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -213,26 +213,20 @@ public class MainFrame extends javax.swing.JFrame {
     {
         
             showOutcome(playerHand, dealerHand);
+            if (handValue(playerHand).get(0)>21) {//если у игрока перебор
+                playerIsDone=true;
+                }
+            if (handValue(dealerHand).get(0)>21) {//если у дилера перебор
+                dealerIsDone=true;
+                }
+            if (dealerIsDone&&playerIsDone) {
+                endGame();
+            }
 
             //пора решать
             //проверка не перебор
             //проверяем игрока
-            if (handValue(playerHand).get(0)>21) 
-            {
-                if (handValue(dealerHand).get(0)>21) {
-                   gameOverText="У обоих перебор, никто не выиграл!\n";
-                   jTextArea1.setText(jTextArea1.getText()+gameOverText); 
-                } else {
-                    gameOverText="У игрока перебор, выиграл дилер!\n";
-                    jTextArea1.setText(jTextArea1.getText()+gameOverText);
-                }
-                gameOver=true;
-            }else if (handValue(dealerHand).get(0)>21) 
-            {
-                gameOverText="У дилера перебор, выиграл игрок!\n";
-                jTextArea1.setText(jTextArea1.getText()+gameOverText);
-                gameOver=true;
-            }else if (has21(handValue(dealerHand)))
+            else if (has21(handValue(dealerHand)))
             {
                 dealerIsDone=true;
             } else if (has21(handValue(playerHand)))
@@ -243,7 +237,7 @@ public class MainFrame extends javax.swing.JFrame {
                 
                 jButton2.setEnabled(!playerIsDone);
                 jButton1.setEnabled(!playerIsDone);
-                if (gameOver) endGame(gameOverText);
+                if (gameOver) endGame();
                 else if (playerIsDone) {
                     dealerMove();
                     }
@@ -252,12 +246,62 @@ public class MainFrame extends javax.swing.JFrame {
             
     }
     
-    private void endGame(String text)
+    private void endGame()
     {
+        int playerBest = BestValue(handValue(playerHand));
+        int dealerBest = BestValue(handValue(dealerHand));
+        //выбираем сообщение о конце игры
+        //если у обоих перебор
+        if (handValue(playerHand).get(0)>21&&handValue(dealerHand).get(0)>21) 
+        {
+            gameOverText="У обоих перебор, никто не выиграл!\n";
+        }
+        //если у игрока перебор, а диллер в порядке
+        if (handValue(playerHand).get(0)>21&&handValue(dealerHand).get(0)<=21) 
+        {
+            gameOverText="У игрока перебор, выиграл дилер!\n";
+        }
+        //если у дилера перебор, а игрок в порядке
+        if (handValue(playerHand).get(0)<=21&&handValue(dealerHand).get(0)>21) 
+        {
+            gameOverText="У дилера перебор, выиграл игрок!\n";
+        }
+        //если у игрока 21, а у диллера нет
+        if (playerBest==21&&dealerBest!=21) 
+        {
+            gameOverText="У игрока 21!\n";
+        }
+        //если у диллера 21, а у игрока нет
+        if (playerBest!=21&&dealerBest==21) 
+        {
+            gameOverText="У дилера 21!\n";
+        }
+        //если у обоих 21
+        if (playerBest==21&&dealerBest==21) 
+        {
+            gameOverText="У обоих 21! Ничья!\n";
+        }
+        //у игрока больше чем у диллера
+        if (playerBest>dealerBest) 
+        {
+            gameOverText="У игрока "+playerBest+" очков, у дилера "+dealerBest+" очков.\nИгрок выиграл!\n" ;
+        }
+        //у игрока меньше чем у диллера  
+        if (playerBest<dealerBest) 
+        {
+            gameOverText="У игрока "+playerBest+" очков, у дилера "+dealerBest+" очков.\nДилер выиграл!\n" ;
+        }
+        //у обоих поровну
+        if (playerBest==dealerBest) 
+        {
+            gameOverText="У игрока "+playerBest+" очков, у дилера "+dealerBest+" очков.\nНичья!\n" ;
+        }
+        
+        jTextArea1.setText(jTextArea1.getText()+gameOverText);
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
         jButton3.setEnabled(true);
-        JOptionPane.showMessageDialog(null, text);
+        JOptionPane.showMessageDialog(null, gameOverText);
     }
     
     private void dealerMove()
@@ -266,25 +310,10 @@ public class MainFrame extends javax.swing.JFrame {
                     dealerHand.add(koloda.getCard());
                     jTextArea1.setText(jTextArea1.getText()+"Дилер берет себе карту\n");
                     showOutcome(playerHand, dealerHand);
-                    gameCheck();
-                } else if (playerIsDone){
-                    //все не хотят больше брать карт
-                    int playerBest = BestValue(handValue(playerHand));
-                    int dealerBest = BestValue(handValue(dealerHand));
-                    jTextArea1.setText(jTextArea1.getText()+"У игрока "+playerBest+" очков, у дилера "+dealerBest+" очков.\n");
-                    if (playerBest>dealerBest) {
-                        gameOverText="Игрок выиграл!\n";
-                        jTextArea1.setText(jTextArea1.getText()+gameOverText);
-                    } else  if (dealerBest>playerBest){
-                        gameOverText="Дилер выиграл!\n";
-                        jTextArea1.setText(jTextArea1.getText()+gameOverText);
-                    } else {
-                        gameOverText="Ничья!\n";
-                        jTextArea1.setText(jTextArea1.getText()+gameOverText);
-                    }
-                    gameOver=true;
-                    endGame(gameOverText);
-                }
+                } else {
+            dealerIsDone=true;
+        }
+        gameCheck();
     }
     
     private static int BestValue (ArrayList<Integer> currentPoints) 
@@ -354,6 +383,36 @@ public class MainFrame extends javax.swing.JFrame {
             
         
 
+    }
+    
+    public static ArrayList<Integer> handValue (ArrayList<Card> hand)
+    {
+        int sum=0;
+        for (Card crd : hand) {
+            //add card value to the sum
+            if (crd.getValue()==Values.Ace) sum+=1;
+            if (crd.getValue()==Values.Two) sum+=2;
+            if (crd.getValue()==Values.Three) sum+=3;
+            if (crd.getValue()==Values.Four) sum+=4;
+            if (crd.getValue()==Values.Five) sum+=5;
+            if (crd.getValue()==Values.Six) sum+=6;
+            if (crd.getValue()==Values.Seven) sum+=7;
+            if (crd.getValue()==Values.Eight) sum+=8;
+            if (crd.getValue()==Values.Nine) sum+=9;
+            if (crd.getValue()==Values.Ten) sum+=10;
+            if (crd.getValue()==Values.Jack) sum+=10;
+            if (crd.getValue()==Values.Queen) sum+=10;
+            if (crd.getValue()==Values.King) sum+=10;
+            }
+        int aces =handAceCount(hand);
+        ArrayList<Integer> handValues = new ArrayList<>();
+        handValues.add(sum);
+        for (int i = 0; i < aces; i++) {
+            sum+=10;
+            handValues.add(sum);
+        }
+        
+        return handValues;
     }
     
     
