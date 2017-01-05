@@ -6,7 +6,6 @@
 package blackjack;
 
 
-import static blackjack.BlackJack.handAceCount;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -428,6 +427,17 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
         return handValues;
+    }
+    
+    public static int handAceCount (ArrayList<Card> hand)
+    {
+        int numOfAces=0;
+        for (Card crd : hand) {
+            //add card value to the sum
+            if (crd.getValue()==Values.Ace) numOfAces+=1;
+            }
+        
+        return numOfAces;
     }
     
     
