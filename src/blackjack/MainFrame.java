@@ -56,10 +56,16 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextArea5 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -96,6 +102,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
+        jTextArea4.setTabSize(25);
+        jTextArea4.setPreferredSize(new java.awt.Dimension(154, 64));
         jScrollPane4.setViewportView(jTextArea4);
 
         jTextArea5.setColumns(20);
@@ -104,14 +112,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Очки дилера");
 
-        jLabel4.setText("Очки игрока");
-
         jButton3.setText("Начать раунд");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
+
+        jLabel5.setText("Очки игрока");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,11 +128,6 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel4)
-                        .addGap(340, 340, 340))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -136,18 +139,25 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(109, 109, 109)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(8, 8, 8)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,9 +173,9 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,36 +224,30 @@ public class MainFrame extends javax.swing.JFrame {
         
             showOutcome(playerHand, dealerHand);
             if (handValue(playerHand).get(0)>21) {//если у игрока перебор
-                playerIsDone=true;
+                gameOver=true;
                 }
             if (handValue(dealerHand).get(0)>21) {//если у дилера перебор
-                dealerIsDone=true;
+                gameOver=true;
                 }
-            if (dealerIsDone&&playerIsDone) {
-                endGame();
-            }
-
-            //пора решать
-            //проверка не перебор
-            //проверяем игрока
-            else if (has21(handValue(dealerHand)))
+            if (has21(handValue(dealerHand)))
             {
                 dealerIsDone=true;
-            } else if (has21(handValue(playerHand)))
+            }
+            if (has21(handValue(playerHand)))
             {
                 playerIsDone=true;
-            } else //ни у кого нет 21 и перебора
-            {
+            }
+            
+            if (dealerIsDone&&playerIsDone) {
+                endGame();
+                return;
+            }
                 
                 jButton2.setEnabled(!playerIsDone);
                 jButton1.setEnabled(!playerIsDone);
                 if (gameOver) endGame();
-                else if (playerIsDone) {
-                    dealerMove();
-                    }
-                
-            }
-            
+                else if (playerIsDone) dealerMove();
+                    
     }
     
     private void endGame()
@@ -255,42 +259,42 @@ public class MainFrame extends javax.swing.JFrame {
         if (handValue(playerHand).get(0)>21&&handValue(dealerHand).get(0)>21) 
         {
             gameOverText="У обоих перебор, никто не выиграл!\n";
-        }
+        } else
         //если у игрока перебор, а диллер в порядке
         if (handValue(playerHand).get(0)>21&&handValue(dealerHand).get(0)<=21) 
         {
             gameOverText="У игрока перебор, выиграл дилер!\n";
-        }
+        }else
         //если у дилера перебор, а игрок в порядке
         if (handValue(playerHand).get(0)<=21&&handValue(dealerHand).get(0)>21) 
         {
             gameOverText="У дилера перебор, выиграл игрок!\n";
-        }
+        }else
         //если у игрока 21, а у диллера нет
         if (playerBest==21&&dealerBest!=21) 
         {
             gameOverText="У игрока 21!\n";
-        }
+        }else
         //если у диллера 21, а у игрока нет
         if (playerBest!=21&&dealerBest==21) 
         {
             gameOverText="У дилера 21!\n";
-        }
+        }else
         //если у обоих 21
         if (playerBest==21&&dealerBest==21) 
         {
             gameOverText="У обоих 21! Ничья!\n";
-        }
+        }else
         //у игрока больше чем у диллера
         if (playerBest>dealerBest) 
         {
             gameOverText="У игрока "+playerBest+" очков, у дилера "+dealerBest+" очков.\nИгрок выиграл!\n" ;
-        }
+        }else
         //у игрока меньше чем у диллера  
         if (playerBest<dealerBest) 
         {
             gameOverText="У игрока "+playerBest+" очков, у дилера "+dealerBest+" очков.\nДилер выиграл!\n" ;
-        }
+        }else
         //у обоих поровну
         if (playerBest==dealerBest) 
         {
@@ -323,6 +327,9 @@ public class MainFrame extends javax.swing.JFrame {
             if (currentPoint>bestValue&&currentPoint<=21) {
                 bestValue=currentPoint;
             }
+        }
+        if (bestValue==0) {
+            bestValue=currentPoints.get(0);
         }
         return bestValue;
     }
@@ -361,6 +368,14 @@ public class MainFrame extends javax.swing.JFrame {
         showOutcome(playerHand, dealerHand);
         dealerMove();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        jTextArea1.setLineWrap(true);
+        jTextArea2.setLineWrap(true);
+        jTextArea3.setLineWrap(true);
+        jTextArea4.setLineWrap(true);
+    }//GEN-LAST:event_formWindowOpened
 
     void showOutcome(ArrayList<Card> playerHand,ArrayList<Card> dealerHand)
     {
@@ -448,6 +463,7 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainFrame().setVisible(true);
+                
             }
         });
     }
@@ -459,7 +475,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
